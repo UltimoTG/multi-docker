@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t UltimoTG/multi-docker-test -f ./client/Dockerfile.dev ./client
+  - docker build -t tashigurung/multi-docker-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run UltimoTG/multi-docker-test npm test -- --coverage
+  - docker run tashigurung/multi-docker-test npm test -- --coverage
 
 after_success:
-  - docker build -t UltimoTG/multi-client ./client
-  - docker build -t UltimoTG/multi-nginx ./nginx
-  - docker build -t UltimoTG/multi-server ./server
-  - docker build -t UltimoTG/multi-worker ./worker
+  - docker build -t tashigurung/multi-client ./client
+  - docker build -t tashigurung/multi-nginx ./nginx
+  - docker build -t tashigurung/multi-server ./server
+  - docker build -t tashigurung/multi-worker ./worker
 
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Take the images and push to Docker Hub
-  - docker push UltimoTG/multi-client
-  - docker push UltimoTG/multi-nginx
-  - docker push UltimoTG/multi-server
-  - docker push UltimoTG/multi-worker
+  - docker push tashigurung/multi-client
+  - docker push tashigurung/multi-nginx
+  - docker push tashigurung/multi-server
+  - docker push tashigurung/multi-worker
